@@ -45,10 +45,13 @@ Before we train, we define helper functions for tracking the training loss and c
 
 # Training:
 We train our model using the train function: def train(train_loader, model, criterion, optimizer, epoch)
+
 We trained our model on Google Co-lab session for 100 epochs.
+
 ![image](https://user-images.githubusercontent.com/33100615/167317185-63cd83bc-6dd7-4c07-93cd-f8611e10947a.png)
 
 We define a training loop:
+
 ![image](https://user-images.githubusercontent.com/33100615/167317198-297ca951-048f-433c-a22b-0d991492b31a.png)
 
 #Validation:
@@ -57,7 +60,8 @@ Using validate function: def validate(val_loader, model, criterion, save_images,
 # Results:
 We showed the results using the following code: 
 ![image](https://user-images.githubusercontent.com/33100615/167317277-ea7bd58f-9788-469c-9614-72ad4ad51799.png)
-A sample image result found in the "outputs" directory
+
+A sample image result found in the "outputs" directory.
 
 Another results were shown in the documentation/report as follows:
 ![image](https://user-images.githubusercontent.com/33100615/167316119-e89343a2-f2f8-4c80-bf4b-06bc0d815f57.png)
