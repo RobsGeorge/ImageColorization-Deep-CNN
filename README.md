@@ -35,5 +35,6 @@ We trained our model on Google Co-lab session for 100 epochs.
 # Results:
 ![image](https://user-images.githubusercontent.com/33100615/167316119-e89343a2-f2f8-4c80-bf4b-06bc0d815f57.png)
 
-
+# Pretrained Model:
+Can be found in this link
 
