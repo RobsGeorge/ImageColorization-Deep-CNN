@@ -21,6 +21,15 @@ We are going to use subset of MIT Places dataset (containing places, landscapes,
 
 Dataset is split into 90% training, and 10% test (validation) ... 40k images for training and 1k for validation.
 
+# Preparation and Steps of Work:
+First, downloading the dataset.
+Then, moving data into training and validation folders
+using this code:
+![image](https://user-images.githubusercontent.com/33100615/167317035-1fe5e919-5959-4741-bd1a-bbca16d6cbdb.png)
+
+After that, downloading and importing libraries needed: 
+![image](https://user-images.githubusercontent.com/33100615/167317066-a1e98e33-ccc5-404e-8a3b-9c0d74f32260.png)
+
 # Tools:
 We'll build and train our model with PyTorch. We'll also use torchvision, a helpful set of tools for working with images and videos in PyTorch, and scikit-learn for converting between RGB and LAB colorspces.
 
@@ -29,12 +38,29 @@ More info about our model can be found in the PDF documentation.
 Here is a figure showing the architecture of the model:
 ![model](https://user-images.githubusercontent.com/33100615/167316005-35e05795-fca3-497d-ba87-7f62d3be8d3a.jpg)
 
+Model is defined inside the code file called model.py
+
+# Helper Functions: 
+Before we train, we define helper functions for tracking the training loss and converting images back to RGB: def to_rgb(grayscale_input, ab_input, save_path=None, save_name=None)
+
 # Training:
+We train our model using the train function: def train(train_loader, model, criterion, optimizer, epoch)
 We trained our model on Google Co-lab session for 100 epochs.
+![image](https://user-images.githubusercontent.com/33100615/167317185-63cd83bc-6dd7-4c07-93cd-f8611e10947a.png)
+
+We define a training loop:
+![image](https://user-images.githubusercontent.com/33100615/167317198-297ca951-048f-433c-a22b-0d991492b31a.png)
+
+#Validation:
+Using validate function: def validate(val_loader, model, criterion, save_images, epoch)
 
 # Results:
+We showed the results using the following code: 
+![image](https://user-images.githubusercontent.com/33100615/167317277-ea7bd58f-9788-469c-9614-72ad4ad51799.png)
+A sample image result found in the "outputs" directory
+
+Another results were shown in the documentation/report as follows:
 ![image](https://user-images.githubusercontent.com/33100615/167316119-e89343a2-f2f8-4c80-bf4b-06bc0d815f57.png)
 
-# Pretrained Model:
-Can be found in this link
+
 
