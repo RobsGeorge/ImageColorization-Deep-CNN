@@ -29,10 +29,10 @@ More info about our model can be found in the PDF documentation.
 Here is a figure showing the architecture of the model:
 ![model](https://user-images.githubusercontent.com/33100615/167316005-35e05795-fca3-497d-ba87-7f62d3be8d3a.jpg)
 
-#Training:
+# Training:
 We trained our model on Google Co-lab session for 100 epochs.
 
-#Results:
+# Results:
 ![image](https://user-images.githubusercontent.com/33100615/167316119-e89343a2-f2f8-4c80-bf4b-06bc0d815f57.png)
 
 
