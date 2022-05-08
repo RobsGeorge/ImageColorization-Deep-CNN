@@ -96,15 +96,6 @@ def main():
         save_images = True
         epoch = 0
         initial_losses = validate(val_loader, model, criterion, save_images, epoch)
-
-        # # Save checkpoint after evaluation if desired
-        # save_checkpoint({
-        #     'epoch': epoch,
-        #     'best_losses': initial_losses,
-        #     'state_dict': model.state_dict(),
-        #     'optimizer': optimizer.state_dict(),
-        # }, False, 'checkpoints/evaluate-checkpoint.pth.tar')
-        
         return  
     
     # Otherwise, train for given number of epochs
@@ -132,7 +123,6 @@ def train(train_loader, model, criterion, optimizer, epoch):
     '''Train model on data in train_loader for a single epoch'''
     print('Starting training epoch {}'.format(epoch))
 
-    # Prepare value counters and timers
     batch_time = AverageMeter()
     data_time = AverageMeter()
     losses = AverageMeter()
@@ -140,7 +130,6 @@ def train(train_loader, model, criterion, optimizer, epoch):
     # Switch model to train mode
     model.train()
     
-    # Train for single eopch
     end = time.time()
     for i, (input_gray, input_ab, target) in enumerate(train_loader):
         
@@ -148,13 +137,10 @@ def train(train_loader, model, criterion, optimizer, epoch):
         input_gray_variable = Variable(input_gray).cuda() if use_gpu else Variable(input_gray)
         input_ab_variable = Variable(input_ab).cuda() if use_gpu else Variable(input_ab)
         target_variable = Variable(target).cuda() if use_gpu else Variable(target)
-
-        # Record time to load data (above)
         data_time.update(time.time() - end)
-
-        # Run forward pass
+        
         output_ab = model(input_gray_variable) # throw away class predictions
-        loss = criterion(output_ab, input_ab_variable) # MSE
+        loss = criterion(output_ab, input_ab_variable)
         
         # Record loss and measure accuracy
         losses.update(loss.data[0], input_gray.size(0))
@@ -168,7 +154,6 @@ def train(train_loader, model, criterion, optimizer, epoch):
         batch_time.update(time.time() - end)
         end = time.time()
         
-        # Print model accuracy -- in the code below, val refers to value, not validation
         if i % args.print_freq == 0:
             print('Epoch: [{0}][{1}/{2}]\t'
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
@@ -187,8 +172,6 @@ def validate(val_loader, model, criterion, save_images, epoch):
     batch_time = AverageMeter()
     data_time = AverageMeter()
     losses = AverageMeter()
-    
-    # Switch model to validation mode
     model.eval()
     
     # Run through validation set
@@ -206,7 +189,7 @@ def validate(val_loader, model, criterion, save_images, epoch):
 
         # Run forward pass
         output_ab = model(input_gray_variable) # throw away class predictions
-        loss = criterion(output_ab, input_ab_variable) # check this!
+        loss = criterion(output_ab, input_ab_variable)
         
         # Record loss and measure accuracy
         losses.update(loss.data[0], input_gray.size(0))
@@ -222,7 +205,6 @@ def validate(val_loader, model, criterion, save_images, epoch):
         batch_time.update(time.time() - end)
         end = time.time()
         
-        # Print model accuracy -- in the code below, val refers to both value and validation
         if i % args.print_freq == 0:
             print('Validate: [{0}/{1}]\t'
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
