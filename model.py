@@ -48,13 +48,13 @@ class ColorNet(nn.Module):
         resnet_gray_model = models.resnet18(num_classes=365)
         resnet_gray_model.conv1.weight = nn.Parameter(resnet_gray_model.conv1.weight.sum(dim=1).unsqueeze(1).data)
         
-        # Only needed if not resuming from a checkpoint: load pretrained ResNet-gray model
-        if torch.cuda.is_available(): # and only if gpu is available
-            resnet_gray_weights = torch.load('pretrained/resnet_gray_weights.pth.tar') #torch.load('pretrained/resnet_gray.tar')['state_dict']
+       
+        if torch.cuda.is_available(): # only if gpu is available
+            resnet_gray_weights = torch.load('pretrained/resnet_gray_weights.pth.tar') 
             resnet_gray_model.load_state_dict(resnet_gray_weights)
             print('Pretrained ResNet-gray weights loaded')
 
-        # Extract midlevel and global features from ResNet-gray
+        
         self.midlevel_resnet = nn.Sequential(*list(resnet_gray_model.children())[0:6])
         self.global_resnet = nn.Sequential(*list(resnet_gray_model.children())[0:9])
         self.fusion_and_colorization_net = ColorizationNet()
@@ -65,6 +65,6 @@ class ColorNet(nn.Module):
         midlevel_output = self.midlevel_resnet(input_image)
         # global_output = self.global_resnet(input_image)
 
-        # Combine features in fusion layer and upsample
+        # Combine features in fusion layer
         output = self.fusion_and_colorization_net(midlevel_output) #, global_output)
         return output
